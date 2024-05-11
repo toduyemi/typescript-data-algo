@@ -1,4 +1,4 @@
-import { Node, NodeValue } from './Node';
+import { Node, NodeValue } from './Node.ts';
 
 export class LinkedList {
   #tail: Node;
@@ -44,7 +44,7 @@ export class LinkedList {
       throw new Error('Invalid index');
     }
 
-    while (currNode.nextNode) {
+    while (currNode) {
       if (count === index) {
         return currNode;
       }
@@ -102,5 +102,52 @@ export class LinkedList {
     }
   }
 
-  toString() {}
+  toString() {
+    let currNode: Node = this.#head;
+    let output: string = '';
+
+    while (currNode) {
+      if (!currNode.nextNode) {
+        output += `(${currNode.value} ) -> null`;
+        return output;
+      }
+      else {
+        output += `( ${currNode.value} ) -> `;
+        currNode = currNode.nextNode;
+      }
+    }
+  }
+
+  insertAt(value: NodeValue, index: number) {
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+
+    let prevNode = this.at(index - 1);
+
+    if (prevNode instanceof Node && prevNode) {
+      let newNode = new Node(value, prevNode.nextNode);
+
+      prevNode.nextNode = newNode;
+    }
+  }
+
+  removeAt(index: number) {
+    if (index === 0 && this.#head.nextNode) {
+      this.#head = this.#head.nextNode;
+      return;
+    }
+
+    let prevNode = this.at(index - 1);
+
+    if (prevNode instanceof Node) {
+      if (prevNode.nextNode) {
+        prevNode.nextNode = prevNode.nextNode.nextNode;
+      }
+      else if (!prevNode.nextNode) {
+        this.pop();
+      }
+    }
+  }
 }
