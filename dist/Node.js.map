@@ -1,0 +1,1 @@
+{"version":3,"file":"Node.js","sourceRoot":"","sources":["../src/Node.ts"],"names":[],"mappings":"AAGA,MAAM,OAAO,IAAI;IACf,KAAK,CAAY;IACjB,QAAQ,CAAc;IACtB,YAAY,QAAmB,IAAI,EAAE,QAAe;QAClD,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;QACnB,IAAI,CAAC,QAAQ,GAAG,QAAQ,IAAI,IAAI,CAAC;IACnC,CAAC;CACF"}
