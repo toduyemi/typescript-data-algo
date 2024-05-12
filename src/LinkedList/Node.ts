@@ -1,10 +1,17 @@
-type T = string | number | null;
-export type NodeValue = T | Array<T> | Record<string, T> | null;
+import { NodeValue } from '../types';
 
 export class Node {
   value: NodeValue;
   nextNode: Node | null;
-  constructor(value: NodeValue = null, nextNode: Node | null = null) {
+  key?: string;
+  constructor(
+    value: NodeValue = null,
+    nextNode: Node | null = null,
+    key?: string,
+  ) {
+    if (key) {
+      this.key = key;
+    }
     this.value = value;
     this.nextNode = nextNode;
   }

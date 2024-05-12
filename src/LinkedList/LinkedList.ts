@@ -1,15 +1,28 @@
-import { Node, NodeValue } from './Node.ts';
+import { Node } from './Node.ts';
+import { NodeValue } from '../types.ts';
 
 export class LinkedList {
   #tail: Node;
   #head: Node;
-  constructor(firstValue: NodeValue) {
-    this.#head = new Node(firstValue);
+  constructor(firstValue: NodeValue, firstKey?: string) {
+    if (firstKey) {
+      this.#head = new Node(firstValue, undefined, firstKey);
+    }
+    else {
+      this.#head = new Node(firstValue);
+    }
+
     this.#tail = this.#head;
   }
 
-  append(value: NodeValue) {
-    this.#tail.nextNode = new Node(value);
+  append(value: NodeValue, key?: string) {
+    if (key) {
+      this.#tail.nextNode = new Node(value, undefined, key);
+    }
+    else {
+      this.#tail.nextNode = new Node(value);
+    }
+
     this.#tail = this.#tail.nextNode;
   }
 
@@ -92,6 +105,22 @@ export class LinkedList {
 
     while (currNode) {
       if (value === currNode.value) {
+        return index;
+      }
+      else if (!currNode.nextNode) {
+        return null;
+      }
+      index++;
+      currNode = currNode.nextNode;
+    }
+  }
+
+  findByKey(key: string) {
+    let currNode: Node = this.#head;
+    let index = 0;
+
+    while (currNode) {
+      if (key === currNode.key) {
         return index;
       }
       else if (!currNode.nextNode) {
