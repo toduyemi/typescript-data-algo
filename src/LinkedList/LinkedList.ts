@@ -1,5 +1,5 @@
-import { Node } from './Node.ts';
-import { NodeValue } from '../types.ts';
+import { Node } from './Node';
+import { NodeValue } from '../types';
 
 export class LinkedList {
   #tail: Node;
@@ -116,7 +116,7 @@ export class LinkedList {
   }
 
   findByKey(key: string) {
-    let currNode: Node = this.#head;
+    let currNode = this.#head;
     let index = 0;
 
     while (currNode) {
@@ -165,6 +165,11 @@ export class LinkedList {
   removeAt(index: number) {
     if (index === 0 && this.#head.nextNode) {
       this.#head = this.#head.nextNode;
+      return;
+    }
+    else if (index === 0) {
+      this.#head = null as unknown as Node;
+      this.#tail = null as unknown as Node;
       return;
     }
 

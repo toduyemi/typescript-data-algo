@@ -1,5 +1,5 @@
-import { LinkedList } from './LinkedList.ts';
-import { Node } from './Node.ts';
+import { LinkedList } from './LinkedList';
+import { Node } from './Node';
 const test = new LinkedList(5);
 
 test.append(6);

@@ -2,7 +2,6 @@
   "name": "template-ts",
   "version": "1.0.0",
   "description": "get 'er done list",
-  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
