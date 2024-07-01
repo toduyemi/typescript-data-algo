@@ -86,9 +86,11 @@ export class HashMap {
       return acc + curr.size();
     }, 0);
   }
+
   clear() {
     this.arr = [];
   }
+
   keys() {
     return this.arr.reduce((acc: string[], curr) => {
       let currNode: Node | null = curr.head;
@@ -101,6 +103,7 @@ export class HashMap {
       return acc;
     }, []);
   }
+
   values() {
     return this.arr.reduce((acc: NodeValue[], curr) => {
       let currNode: Node | null = curr.head;

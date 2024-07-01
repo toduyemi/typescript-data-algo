@@ -1,7 +1,10 @@
-const samp = [3, 2, 1, 13, 8, 5, 0, 1];
-const samp2 = [105, 79, 100, 110];
-
-function mergeSort(arr: Array<number>) {
+function test(arr: number[]) {
+  const samp = [3, 2, 1, 13, 8, 5, 0, 1];
+  const samp2 = [105, 79, 100, 110];
+  console.log(mergeSort(samp));
+  console.log(mergeSort(samp2));
+}
+export function mergeSort(arr: Array<number>) {
   const len = arr.length;
   const half = len / 2;
   let output = [];
@@ -11,6 +14,7 @@ function mergeSort(arr: Array<number>) {
   }
 
   const left = arr.slice(0, half);
+
   const right = arr.slice(half);
 
   const leftSort: Array<number> = mergeSort(left);
@@ -21,15 +25,18 @@ function mergeSort(arr: Array<number>) {
       for (; i < len; i++, k++) {
         output[i] = leftSort[k];
       }
-    } else if (k >= leftSort.length) {
+    }
+    else if (k >= leftSort.length) {
       for (; i < len; i++, j++) {
         output[i] = rightSort[j];
       }
-    } else if (leftSort[k] > rightSort[j]) {
+    }
+    else if (leftSort[k] > rightSort[j]) {
       output[i] = rightSort[j];
       i++;
       j++;
-    } else {
+    }
+    else {
       output[i] = leftSort[k];
       i++;
       k++;
@@ -37,10 +44,3 @@ function mergeSort(arr: Array<number>) {
   }
   return output;
 }
-
-function merge(leftSort:number[], rightSort:number[]){
-
-
-}
-console.log(mergeSort(samp));
-console.log(mergeSort(samp2));
