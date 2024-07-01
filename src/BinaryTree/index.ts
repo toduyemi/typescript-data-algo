@@ -21,3 +21,10 @@ console.log(tree.find(45));
 tree.deleteItem(4);
 
 tree.prettyPrint();
+
+console.log(tree.levelOrder());
+
+tree.levelOrder((node) => {
+  node.value = node.value! * 3;
+}),
+  console.log(tree.levelOrder());

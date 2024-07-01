@@ -173,7 +173,29 @@ export class Tree {
     }
   }
 
-  levelOrder(callback?: (node: Node) => void): number[] {
-    const queue: Node[] = [];
+  levelOrder(callback?: (node: Node) => void): number[] | undefined {
+    if (!this.root) return;
+    const queue: Node[] = [this.root];
+    const levelOrderArray: number[] = [];
+
+    while (queue.length) {
+      const current = queue.shift();
+      if (current?.left) queue.push(current.left);
+      if (current?.right) queue.push(current.right);
+      if (callback) {
+        callback(current!);
+      }
+      else {
+        levelOrderArray.push(current?.value!);
+      }
+    }
+
+    if (!callback) {
+      return levelOrderArray;
+    }
   }
+
+  // #levelTraverse(node: Node = this.root!) {
+  //   queue;
+  // }
 }
