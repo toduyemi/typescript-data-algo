@@ -1,6 +1,13 @@
 import { mergeSort } from '../mergeSort/merge-sort';
+import { NodeValue } from '../types';
 import { Node } from './Node';
+type TraverseCallback = (node: Node) => void;
 
+interface TraverseOptions {
+  node?: Node | null;
+  callback?: TraverseCallback;
+  arr: NodeValue[];
+}
 export class Tree {
   root: Node | null;
   originalArr: number[];
@@ -173,7 +180,7 @@ export class Tree {
     }
   }
 
-  levelOrder(callback?: (node: Node) => void): number[] | undefined {
+  levelOrder(callback?: TraverseCallback | undefined) {
     if (!this.root) return;
     const queue: Node[] = [this.root];
     const levelOrderArray: number[] = [];
@@ -195,7 +202,72 @@ export class Tree {
     }
   }
 
-  // #levelTraverse(node: Node = this.root!) {
-  //   queue;
-  // }
+  preOrder(callback?: TraverseCallback): NodeValue[] | undefined {
+    const arr: NodeValue[] = [];
+
+    this.#preOrderHelper({ callback: callback, arr: arr });
+
+    return arr;
+  }
+
+  #preOrderHelper({ node = this.root, callback, arr }: TraverseOptions) {
+    if (!node) return;
+
+    if (callback) {
+      callback(node);
+    }
+
+    arr.push(node.value);
+    this.#preOrderHelper({ node: node.left, arr: arr });
+    this.#preOrderHelper({ node: node.right, arr: arr });
+  }
+
+  inOrder(callback?: TraverseCallback): NodeValue[] | undefined {
+    const arr: NodeValue[] = [];
+
+    this.#inOrderHelper({ callback: callback, arr: arr });
+
+    return arr;
+  }
+
+  #inOrderHelper({ node = this.root, callback, arr }: TraverseOptions) {
+    if (!node) return;
+
+    if (callback) {
+      callback(node);
+    }
+
+    this.#inOrderHelper({ node: node.left, arr: arr });
+    arr.push(node.value);
+    this.#inOrderHelper({ node: node.right, arr: arr });
+  }
+
+  postOrder(callback?: TraverseCallback): NodeValue[] | undefined {
+    const arr: NodeValue[] = [];
+
+    this.#postOrderHelper({ callback: callback, arr: arr });
+
+    return arr;
+  }
+
+  #postOrderHelper({ node = this.root, callback, arr }: TraverseOptions) {
+    if (!node) return;
+
+    if (callback) {
+      callback(node);
+    }
+
+    this.#postOrderHelper({ node: node.left, arr: arr });
+    this.#postOrderHelper({ node: node.right, arr: arr });
+    arr.push(node.value);
+  }
+
+  height(node = this.root, counter = 0): number {
+    if (!node) return counter;
+    const maxLeft = this.height(node.left, ++counter);
+    counter--;
+    const maxRight = this.height(node.right, ++counter);
+
+    return maxLeft > maxRight ? maxLeft : maxRight;
+  }
 }

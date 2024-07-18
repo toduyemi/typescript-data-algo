@@ -22,9 +22,31 @@ tree.deleteItem(4);
 
 tree.prettyPrint();
 
-console.log(tree.levelOrder());
+// console.log(tree.levelOrder());
 
-tree.levelOrder((node) => {
+// tree.levelOrder((node) => {
+//   node.value = node.value! * 3;
+// });
+// console.log(tree.levelOrder());
+
+// console.log(tree.preOrder());
+
+// tree.preOrder((node) => {
+//   node.value = node.value! * 3;
+// }),
+//   console.log(tree.preOrder());
+
+// console.log(tree.inOrder());
+
+// tree.inOrder((node) => {
+//   node.value = node.value! * 3;
+// }),
+//   console.log(tree.inOrder());
+console.log(tree.postOrder());
+
+tree.postOrder((node) => {
   node.value = node.value! * 3;
 }),
-  console.log(tree.levelOrder());
+  console.log(tree.postOrder());
+
+console.log(tree.height(tree.find(3)));
